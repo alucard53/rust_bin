@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>My Website</title>
+</head>
+
+<body>
+	<script>
+		async function handleSubmit(event) {
+			console.log(event)
+			event.preventDefault();
+			const text = document.getElementsByClassName("tb")[0];
+
+			try {
+				const res = await fetch("http://localhost:6969/pasted", {
+					method: "POST",
+					body: JSON.stringify({ "text": text.value }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+				})
+
+                const data = await res.json()
+                window.location.replace(`http://localhost:6969/paste/${data.id}`)
+			} catch (e) {
+				console.log(e)
+			}
+		}
+	</script>
+	<main>
+		<h1>Rust_Bin</h1>
+	</main>
+	<form>
+		<span class="tb_container">
+			<textarea class="tb" type="textarea"></textarea>
+		</span>
+		<button onclick="handleSubmit(event)">Paste</button>
+	</form>
+
+	<style>
+		body {
+			width: 100%;
+			height: 100vh;
+			text-align: center;
+		}
+
+		form {
+			height: 50%;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
+
+		.tb_container {
+			width: 50em;
+			height: 50rem;
+		}
+
+		.tb {
+			height: 100%;
+			width: 100%;
+			font-size: 9pt;
+		}
+
+        button {
+            margin-top: 5%;
+        }
+	</style>
+</body>
+
+</html>
