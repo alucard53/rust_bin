@@ -85,14 +85,9 @@ async fn paste_handler(
 
     let text: String = payload
         .text
-        .trim()
         .trim_matches('\n')
-        .chars()
-        .map(|c| match c {
-            '\'' => "\''".to_string(),
-            _ => c.to_string(),
-        })
-        .collect();
+        .trim()
+        .replace("'", "''");
 
     let query = format!("INSERT INTO DATA VALUES ('{}', '{}')", id, text);
 
