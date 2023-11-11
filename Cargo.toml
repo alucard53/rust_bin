@@ -13,3 +13,4 @@ serde = "1.0.190"
 tower-http = { version = "0.4.4", features = ["cors"]}
 http = "0.2.9"
 uuid = { version = "1.5.0", features = ["v4", "fast-rng", "macro-diagnostics"] }
+dotenv = "0.15.0"
